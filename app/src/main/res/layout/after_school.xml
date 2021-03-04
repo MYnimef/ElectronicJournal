@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/employersButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="onEmployersClick"
+        android:text="Employers"
+        android:textColor="@color/teal_700"
+        android:background="@color/teal" />
+
+    <LinearLayout
+        android:id="@+id/employersLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <Button
+            android:id="@+id/addEmployersButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/plus"
+            android:textColor="@color/teal_200"
+            android:background="@color/teal_700" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/teachersButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="onTeachersClick"
+        android:text="Teachers"
+        android:textColor="@color/teal_700"
+        android:background="@color/teal"/>
+
+    <LinearLayout
+        android:id="@+id/teachersLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/addTeachersButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/plus"
+            android:textColor="@color/teal_200"
+            android:background="@color/teal_700" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/classesButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="onClassesClick"
+        android:text="Classes"
+        android:textColor="@color/teal_700"
+        android:background="@color/teal"/>
+
+    <LinearLayout
+        android:id="@+id/classesLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/addClassesButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/plus"
+            android:textColor="@color/teal_200"
+            android:background="@color/teal_700" />
+    </LinearLayout>
+</LinearLayout>
