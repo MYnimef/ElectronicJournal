@@ -9,7 +9,7 @@
         android:layout_height="match_parent" >
 
         <TextView
-            android:id="@+id/addSchoolText"
+            android:id="@+id/addEmployerText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -18,52 +18,65 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="50dp"
-            android:text="Add new school" />
+            android:text="Add new employer" />
 
         <EditText
-            android:id="@+id/editAddress"
+            android:id="@+id/editFullName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/addSchoolText"
+            android:layout_below="@+id/addEmployerText"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="50dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="50dp"
             android:ems="10"
-            android:hint="Enter address" />
+            android:hint="Enter full name" />
 
         <EditText
-            android:id="@+id/editName"
+            android:id="@+id/editPhone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/editAddress"
+            android:layout_below="@+id/editFullName"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="50dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="50dp"
             android:ems="10"
-            android:hint="Enter name" />
+            android:hint="Enter phone" />
 
         <EditText
-            android:id="@+id/editNumber"
+            android:id="@+id/editCardID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/editName"
+            android:layout_below="@+id/editPhone"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="50dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="50dp"
             android:ems="10"
-            android:hint="Enter number" />
+            android:hint="Enter card ID" />
+
+        <EditText
+            android:id="@+id/editPosition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editCardID"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="50dp"
+            android:ems="10"
+            android:hint="Enter position" />
 
         <Button
             android:id="@+id/okButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/editNumber"
+            android:layout_below="@+id/editPosition"
             android:layout_alignParentStart="true"
             android:layout_marginStart="50dp"
             android:layout_marginTop="20dp"
@@ -76,7 +89,7 @@
             android:id="@+id/cancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/editNumber"
+            android:layout_below="@+id/editPosition"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="50dp"

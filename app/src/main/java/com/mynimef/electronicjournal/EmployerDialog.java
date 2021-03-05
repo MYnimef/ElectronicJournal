@@ -12,8 +12,8 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-public class SchoolDialog extends AppCompatDialogFragment {
-    private EditText address, name, number;
+public class EmployerDialog extends AppCompatDialogFragment {
+    private EditText fullName, phone, cardID, position;
     DialogData data;
 
     @Override
@@ -32,7 +32,7 @@ public class SchoolDialog extends AppCompatDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.school_dialog, null);
+        View view = inflater.inflate(R.layout.employer_dialog, null);
         builder.setView(view);
 
         Button okBtn = (Button) view.findViewById(R.id.okButton);
@@ -41,20 +41,22 @@ public class SchoolDialog extends AppCompatDialogFragment {
         Button cancelBtn = (Button) view.findViewById(R.id.cancelButton);
         cancelBtn.setOnClickListener( this::cancelButtonPressed );
 
-        address = (EditText) view.findViewById(R.id.editAddress);
-        name = (EditText) view.findViewById(R.id.editName);
-        number = (EditText) view.findViewById(R.id.editNumber);
+        fullName = (EditText) view.findViewById(R.id.editFullName);
+        phone = (EditText) view.findViewById(R.id.editPhone);
+        cardID = (EditText) view.findViewById(R.id.editCardID);
+        position = (EditText) view.findViewById(R.id.editPosition);
 
         return builder.create();
     }
 
     public void okButtonPressed(View view) {
-        String addressStr = address.getText().toString();
-        String nameStr = name.getText().toString();
-        String numberStr = number.getText().toString();
+        String fullNameStr = fullName.getText().toString();
+        String phoneStr = phone.getText().toString();
+        String cardIdStr = cardID.getText().toString();
+        String positionStr = cardID.getText().toString();
 
-        if (!addressStr.isEmpty() && !nameStr.isEmpty() && !numberStr.isEmpty()) {
-            data.getSchoolData(addressStr, nameStr, numberStr);
+        if (!fullNameStr.isEmpty() && !phoneStr.isEmpty() && !cardIdStr.isEmpty() && !positionStr.isEmpty()) {
+            data.getEmployerData(fullNameStr, phoneStr, cardIdStr, positionStr);
             dismiss();
         }
     }

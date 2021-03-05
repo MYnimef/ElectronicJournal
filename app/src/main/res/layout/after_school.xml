@@ -22,11 +22,19 @@
         android:orientation="vertical"
         android:visibility="gone" >
 
+        <LinearLayout
+            android:id="@+id/newEmployersLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+
         <Button
             android:id="@+id/addEmployersButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="addEmployersClick"
             android:text="@string/plus"
             android:textColor="@color/teal_200"
             android:background="@color/teal_700" />
@@ -50,11 +58,19 @@
         android:orientation="vertical"
         android:visibility="gone">
 
+        <LinearLayout
+            android:id="@+id/newTeachersLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+
         <Button
             android:id="@+id/addTeachersButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="addTeachersClick"
             android:text="@string/plus"
             android:textColor="@color/teal_200"
             android:background="@color/teal_700" />
@@ -78,11 +94,19 @@
         android:orientation="vertical"
         android:visibility="gone">
 
+        <LinearLayout
+            android:id="@+id/newClassesLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+
         <Button
             android:id="@+id/addClassesButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="addClassesClick"
             android:text="@string/plus"
             android:textColor="@color/teal_200"
             android:background="@color/teal_700" />
