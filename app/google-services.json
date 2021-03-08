@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "558470818054",
+    "project_id": "electronicjournal-e56d4",
+    "storage_bucket": "electronicjournal-e56d4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558470818054:android:38ee3714c9ddaf01955687",
+        "android_client_info": {
+          "package_name": "com.mynimef.electronicjournal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "558470818054-t8v0j7ruosvr10mnsedkut0mmg15fcgn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk77AAGdnVgTZLvcLw7yIrGddRPpm1MoA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "558470818054-t8v0j7ruosvr10mnsedkut0mmg15fcgn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

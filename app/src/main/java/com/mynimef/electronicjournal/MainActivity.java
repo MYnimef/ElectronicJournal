@@ -10,6 +10,9 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class MainActivity extends AppCompatActivity implements DialogData {
     int amountOfSchools = 0;
     Button[] schoolButton;
@@ -66,24 +69,24 @@ public class MainActivity extends AppCompatActivity implements DialogData {
 
     public void onSchoolClick(View view) {
         Button tappedSchool = (Button) view;
-        int tap = (int) tappedSchool.getTag();
-        if (clickOnSchool[tap]) {
-            afterSchool[tap].setVisibility(View.GONE);
-            clickOnSchool[tap] = false;
+        actualTap = (int) tappedSchool.getTag();
+        if (clickOnSchool[actualTap]) {
+            afterSchool[actualTap].setVisibility(View.GONE);
+            clickOnSchool[actualTap] = false;
         }
         else {
-            afterSchool[tap].setVisibility(View.VISIBLE);
-            clickOnSchool[tap] = true;
+            afterSchool[actualTap].setVisibility(View.VISIBLE);
+            clickOnSchool[actualTap] = true;
 
-            Button empBtn = (Button) afterSchool[tap].findViewById(R.id.employersButton);
+            Button empBtn = (Button) afterSchool[actualTap].findViewById(R.id.employersButton);
             empBtn.setOnClickListener( this::onEmployersClick );
-            empBtn.setTag(tap);
-            Button teachBtn = (Button) afterSchool[tap].findViewById(R.id.teachersButton);
+            empBtn.setTag(actualTap);
+            Button teachBtn = (Button) afterSchool[actualTap].findViewById(R.id.teachersButton);
             teachBtn.setOnClickListener( this::onTeachersClick );
-            teachBtn.setTag(tap);
-            Button classBtn = (Button) afterSchool[tap].findViewById(R.id.classesButton);
+            teachBtn.setTag(actualTap);
+            Button classBtn = (Button) afterSchool[actualTap].findViewById(R.id.classesButton);
             classBtn.setOnClickListener( this::onClassesClick );
-            classBtn.setTag(tap);
+            classBtn.setTag(actualTap);
         }
     }
 
@@ -115,56 +118,59 @@ public class MainActivity extends AppCompatActivity implements DialogData {
 
     public void onEmployersClick(View view) {
         Button tapped = (Button) view;
-        int tap = (int) tapped.getTag();
-        LinearLayout empLayout = (LinearLayout) afterSchool[tap].findViewById(R.id.employersLayout);
+        actualTap = (int) tapped.getTag();
+        LinearLayout empLayout = (LinearLayout) afterSchool[actualTap].findViewById(R.id.employersLayout);
 
-        if (clickOnEmployers[tap]) {
+        if (clickOnEmployers[actualTap]) {
             empLayout.setVisibility(View.GONE);
-            clickOnEmployers[tap] = false;
+            clickOnEmployers[actualTap] = false;
         }
         else {
             empLayout.setVisibility(View.VISIBLE);
-            Button empBtn = (Button) afterSchool[tap].findViewById(R.id.addEmployersButton);
+            Button empBtn = (Button) afterSchool[actualTap].findViewById(R.id.addEmployersButton);
             empBtn.setOnClickListener( this::addEmployersClick );
-            empBtn.setTag(tap);
-            clickOnEmployers[tap] = true;
+            empBtn.setTag(actualTap);
+            clickOnEmployers[actualTap] = true;
         }
+        makeEmployersButtons();
     }
 
     public void onTeachersClick(View view) {
         Button tapped = (Button) view;
-        int tap = (int) tapped.getTag();
-        LinearLayout teachLayout = (LinearLayout) afterSchool[tap].findViewById(R.id.teachersLayout);
+        actualTap = (int) tapped.getTag();
+        LinearLayout teachLayout = (LinearLayout) afterSchool[actualTap].findViewById(R.id.teachersLayout);
 
-        if (clickOnTeachers[tap]) {
+        if (clickOnTeachers[actualTap]) {
             teachLayout.setVisibility(View.GONE);
-            clickOnTeachers[tap] = false;
+            clickOnTeachers[actualTap] = false;
         }
         else {
             teachLayout.setVisibility(View.VISIBLE);
-            Button teachBtn = (Button) afterSchool[tap].findViewById(R.id.addTeachersButton);
+            Button teachBtn = (Button) afterSchool[actualTap].findViewById(R.id.addTeachersButton);
             teachBtn.setOnClickListener( this::addTeachersClick );
-            teachBtn.setTag(tap);
-            clickOnTeachers[tap] = true;
+            teachBtn.setTag(actualTap);
+            clickOnTeachers[actualTap] = true;
         }
+        makeTeachersButtons();
     }
 
     public void onClassesClick(View view) {
         Button tapped = (Button) view;
-        int tap = (int) tapped.getTag();
-        LinearLayout classLayout = (LinearLayout) afterSchool[tap].findViewById(R.id.classesLayout);
+        actualTap = (int) tapped.getTag();
+        LinearLayout classLayout = (LinearLayout) afterSchool[actualTap].findViewById(R.id.classesLayout);
 
-        if (clickOnClasses[tap]) {
+        if (clickOnClasses[actualTap]) {
             classLayout.setVisibility(View.GONE);
-            clickOnClasses[tap] = false;
+            clickOnClasses[actualTap] = false;
         }
         else {
             classLayout.setVisibility(View.VISIBLE);
-            Button classBtn = (Button) afterSchool[tap].findViewById(R.id.addClassesButton);
+            Button classBtn = (Button) afterSchool[actualTap].findViewById(R.id.addClassesButton);
             classBtn.setOnClickListener( this::addClassesClick );
-            classBtn.setTag(tap);
-            clickOnClasses[tap] = true;
+            classBtn.setTag(actualTap);
+            clickOnClasses[actualTap] = true;
         }
+        makeClassesButtons();
     }
 
     public void addEmployersClick(View view) {
