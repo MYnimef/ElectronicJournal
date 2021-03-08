@@ -14,7 +14,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity implements DialogData {
-    int amountOfSchools = 0;
+    boolean start = false;
+    private int amountOfSchools = 0;
     Button[] schoolButton;
     LinearLayout[] afterSchool;
     School[] schoolList;
@@ -28,10 +29,14 @@ public class MainActivity extends AppCompatActivity implements DialogData {
     boolean[] clickOnEmployers, clickOnTeachers, clickOnClasses;
     int actualTap;
 
+    private DatabaseReference myRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        myRef = database.getReference();
         makeSchoolButtons();
     }
 
@@ -96,9 +101,8 @@ public class MainActivity extends AppCompatActivity implements DialogData {
         myDialogFragment.show(manager, "myDialog");
     }
 
-    @Override
     public void getSchoolData(String address, String name, String number) {
-        if (amountOfSchools != 0) {
+        if (start) {
             School[] sup = schoolList;
             schoolList = new School[amountOfSchools + 1];
             for (int i = 0; i < amountOfSchools; i++) {
@@ -107,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements DialogData {
         }
         else {
             schoolList = new School[amountOfSchools + 1];
+            start = true;
         }
         schoolList[amountOfSchools] = new School();
         schoolList[amountOfSchools].Address = address;
@@ -182,7 +187,6 @@ public class MainActivity extends AppCompatActivity implements DialogData {
         myDialogFragment.show(manager, "myDialog");
     }
 
-    @Override
     public void getEmployerData(String fullName, String phone, String cardID, String position) {
         schoolList[actualTap].addEmployee(fullName, phone, cardID, position);
         makeEmployersButtons();
@@ -218,8 +222,8 @@ public class MainActivity extends AppCompatActivity implements DialogData {
         myDialogFragment.show(manager, "myDialog");
     }
 
-    @Override
-    public void getTeacherData(String fullName, String phone, String cardID, String position, String qualification) {
+    public void getTeacherData(String fullName, String phone, String cardID, String position,
+                               String qualification) {
         schoolList[actualTap].addTeacher(fullName, phone, cardID, position, qualification);
         makeTeachersButtons();
     }
@@ -250,12 +254,11 @@ public class MainActivity extends AppCompatActivity implements DialogData {
         actualTap = (int) tapped.getTag();
 
         FragmentManager manager = getSupportFragmentManager();
-        EmployerDialog myDialogFragment = new EmployerDialog();
+        ClassDialog myDialogFragment = new ClassDialog();
         myDialogFragment.show(manager, "myDialog");
     }
 
-    @Override
-    public void getClassData() {
+    public void getClassData(String number) {
     }
 
     public void makeClassesButtons() {
@@ -273,6 +276,12 @@ public class MainActivity extends AppCompatActivity implements DialogData {
             classesButton[i].setText(schoolList[actualTap].Employers[i].Position + " - " +
                     schoolList[actualTap].Employers[i].FullName);
             classesLayout.addView(classesButton[i]);
+        }
+    }
+
+    public void onSaveClick(View view) {
+        if (start) {
+            //myRef.child("users").child("user").setValue(schoolList);
         }
     }
 }
