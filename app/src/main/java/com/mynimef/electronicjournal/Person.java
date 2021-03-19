@@ -1,6 +1,6 @@
 package com.mynimef.electronicjournal;
 
-public class Person extends School {
+public class Person {
     public String FullName;
     public String Phone;
 }

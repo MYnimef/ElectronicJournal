@@ -1,6 +1,6 @@
 package com.mynimef.electronicjournal;
 
-public class Section extends School {
+public class Section {
     public String Name;
     public Student[] Students;
     public Teacher ClassTeacher;
