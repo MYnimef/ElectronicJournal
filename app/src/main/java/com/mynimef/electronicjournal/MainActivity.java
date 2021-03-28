@@ -12,13 +12,15 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.mynimef.electronicjournal.school.School;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements DialogData {
-    boolean start = false;
     private int amountOfSchools = 0;
     Button[] schoolButton;
     LinearLayout[] afterSchool;
-    School[] schoolList;
+    ArrayList<School> schoolList = new ArrayList();
 
     boolean[] clickOnSchool;
 
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements DialogData {
         setContentView(R.layout.activity_main);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
+
+        //schoolList.add(myRef.child("users").child("user").getClass());
         makeSchoolButtons();
     }
 
@@ -57,8 +61,8 @@ public class MainActivity extends AppCompatActivity implements DialogData {
                     false);
             schoolButton[i].setTag(i);
             schoolButton[i].setOnClickListener(this::onSchoolClick);
-            schoolButton[i].setText("School number: " + schoolList[i].Number + ", " +
-                    schoolList[i].Name);
+            schoolButton[i].setText("School number: " + schoolList.get(i).Number + ", " +
+                    schoolList.get(i).Name);
             schoolLayout.addView(schoolButton[i]);
 
             afterSchool[i] = (LinearLayout) inflater.inflate(R.layout.after_school, schoolLayout,
@@ -102,21 +106,11 @@ public class MainActivity extends AppCompatActivity implements DialogData {
     }
 
     public void getSchoolData(String address, String name, String number) {
-        if (start) {
-            School[] sup = schoolList;
-            schoolList = new School[amountOfSchools + 1];
-            for (int i = 0; i < amountOfSchools; i++) {
-                schoolList[i] = sup[i];
-            }
-        }
-        else {
-            schoolList = new School[amountOfSchools + 1];
-            start = true;
-        }
-        schoolList[amountOfSchools] = new School();
-        schoolList[amountOfSchools].Address = address;
-        schoolList[amountOfSchools].Name = name;
-        schoolList[amountOfSchools].Number = number;
+        School school = new School();
+        school.Address = address;
+        school.Name = name;
+        school.Number = number;
+        schoolList.add(school);
         amountOfSchools++;
         makeSchoolButtons();
     }
@@ -188,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements DialogData {
     }
 
     public void getEmployerData(String fullName, String phone, String cardID, String position) {
-        schoolList[actualTap].addEmployee(fullName, phone, cardID, position);
+        schoolList.get(actualTap).addEmployee(fullName, phone, cardID, position);
         makeEmployersButtons();
     }
 
@@ -196,16 +190,16 @@ public class MainActivity extends AppCompatActivity implements DialogData {
         LinearLayout employersLayout = afterSchool[actualTap].findViewById(R.id.newEmployersLayout);
         employersLayout.removeAllViews();
 
-        employersButton = new Button[schoolList[actualTap].AmountOfEmployers];
-        for (int i = 0; i < schoolList[actualTap].AmountOfEmployers; i++) {
+        employersButton = new Button[schoolList.get(actualTap).AmountOfEmployers];
+        for (int i = 0; i < schoolList.get(actualTap).AmountOfEmployers; i++) {
             LayoutInflater inflater = (LayoutInflater) getApplicationContext()
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             employersButton[i] = (Button) inflater.inflate(R.layout.employer_button,
                     employersLayout, false);
             employersButton[i].setTag(i);
             employersButton[i].setOnClickListener(this::onEmployerButtonClick);
-            employersButton[i].setText(schoolList[actualTap].Employers[i].Position + " - " +
-                    schoolList[actualTap].Employers[i].FullName);
+            employersButton[i].setText(schoolList.get(actualTap).Employers[i].Position + " - " +
+                    schoolList.get(actualTap).Employers[i].FullName);
             employersLayout.addView(employersButton[i]);
         }
     }
@@ -224,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements DialogData {
 
     public void getTeacherData(String fullName, String phone, String cardID, String position,
                                String qualification) {
-        schoolList[actualTap].addTeacher(fullName, phone, cardID, position, qualification);
+        schoolList.get(actualTap).addTeacher(fullName, phone, cardID, position, qualification);
         makeTeachersButtons();
     }
 
@@ -232,16 +226,16 @@ public class MainActivity extends AppCompatActivity implements DialogData {
         LinearLayout teachersLayout = afterSchool[actualTap].findViewById(R.id.newTeachersLayout);
         teachersLayout.removeAllViews();
 
-        teachersButton = new Button[schoolList[actualTap].AmountOfTeachers];
-        for (int i = 0; i < schoolList[actualTap].AmountOfTeachers; i++) {
+        teachersButton = new Button[schoolList.get(actualTap).AmountOfTeachers];
+        for (int i = 0; i < schoolList.get(actualTap).AmountOfTeachers; i++) {
             LayoutInflater inflater = (LayoutInflater) getApplicationContext()
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             teachersButton[i] = (Button) inflater.inflate(R.layout.teacher_button,
                     teachersLayout, false);
             teachersButton[i].setTag(i);
             teachersButton[i].setOnClickListener(this::onTeacherButtonClick);
-            teachersButton[i].setText(schoolList[actualTap].Teachers[i].Position + " - " +
-                    schoolList[actualTap].Teachers[i].FullName);
+            teachersButton[i].setText(schoolList.get(actualTap).Teachers[i].Position + " - " +
+                    schoolList.get(actualTap).Teachers[i].FullName);
             teachersLayout.addView(teachersButton[i]);
         }
     }
@@ -265,23 +259,21 @@ public class MainActivity extends AppCompatActivity implements DialogData {
         LinearLayout classesLayout = afterSchool[actualTap].findViewById(R.id.newEmployersLayout);
         classesLayout.removeAllViews();
 
-        classesButton = new Button[schoolList[actualTap].AmountOfClasses];
-        for (int i = 0; i < schoolList[actualTap].AmountOfClasses; i++) {
+        classesButton = new Button[schoolList.get(actualTap).AmountOfClasses];
+        for (int i = 0; i < schoolList.get(actualTap).AmountOfClasses; i++) {
             LayoutInflater inflater = (LayoutInflater) getApplicationContext()
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             classesButton[i] = (Button) inflater.inflate(R.layout.employer_button,
                     classesLayout, false);
             classesButton[i].setTag(i);
             classesButton[i].setOnClickListener(this::onEmployerButtonClick);
-            classesButton[i].setText(schoolList[actualTap].Employers[i].Position + " - " +
-                    schoolList[actualTap].Employers[i].FullName);
+            classesButton[i].setText(schoolList.get(actualTap).Employers[i].Position + " - " +
+                    schoolList.get(actualTap).Employers[i].FullName);
             classesLayout.addView(classesButton[i]);
         }
     }
 
     public void onSaveClick(View view) {
-        if (start) {
-            //myRef.child("users").child("user").setValue(schoolList);
-        }
+        myRef.child("users").child("user").setValue(schoolList);
     }
 }

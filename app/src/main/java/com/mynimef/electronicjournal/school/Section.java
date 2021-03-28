@@ -1,4 +1,4 @@
-package com.mynimef.electronicjournal;
+package com.mynimef.electronicjournal.school;
 
 public class Section {
     public String Name;
